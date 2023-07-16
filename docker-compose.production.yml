@@ -18,14 +18,12 @@ services:
       - static_volume:/backend_static
       - media_volume:/media
   frontend:
-    env_file: .env
     image: mrsunstrike/kittygram_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
   gateway:
     image: mrsunstrike/kittygram_gateway
-    env_file: .env
     volumes:
       - static_volume:/staticfiles
       - media_volume:/media
