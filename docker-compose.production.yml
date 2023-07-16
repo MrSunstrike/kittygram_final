@@ -8,12 +8,20 @@ volumes:
 services:
   db:
     image: postgres:13
-    env_file: .env
+    environment:
+      - POSTGRES_DB=kittygram
+      - POSTGRES_USER=kittygram_user
+      - POSTGRES_PASSWORD=kittygram_password
     volumes:
       - pg_data_production:/var/lib/postgresql/data
   backend:
     image: mrsunstrike/kittygram_backend
-    env_file: .env
+    environment:
+      - POSTGRES_DB=kittygram
+      - POSTGRES_USER=kittygram_user
+      - POSTGRES_PASSWORD=kittygram_password
+      - DB_HOST=db
+      - DB_PORT=5432
     volumes:
       - static_volume:/backend_static
       - media_volume:/media
